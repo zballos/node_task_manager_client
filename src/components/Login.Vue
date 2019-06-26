@@ -4,6 +4,10 @@
     <input type="text" name="email" v-model="input.email" placeholder="E-mail" />
     <input type="password" name="password" v-model="input.password" placeholder="Password" />
     <button type="button" v-on:click="login()">Login</button>
+    <fb:login-button
+      scope="public_profile,email"
+      v-on:click="checkLoginState();">
+    </fb:login-button>
   </div>
 </template>
 
@@ -41,6 +45,35 @@ export default {
     }
   }
 }
+
+function checkLoginState(){
+  FB.getLoginStatus(function(response) {
+    console.log(response)
+    statusChangeCallback(response);
+  });
+}
+
+window.fbAsyncInit = function() {
+  FB.init({
+    appId      : '415097349334292',
+    cookie     : true,
+    xfbml      : true,
+    version    : 'v3.3'
+  });
+
+  FB.AppEvents.logPageView();
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+
+
+
 </script>
 
 <style scoped>
