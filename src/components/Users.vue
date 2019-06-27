@@ -23,8 +23,8 @@
       </table>
     </div>
     <div v-else>
-      There are no posts.. Lets add one now <br /><br />
-      <router-link v-bind:to="{ name: 'NewPost' }" class="add_post_link">Add Post</router-link>
+      There are no users.. Lets add one now <br /><br />
+      <router-link v-bind:to="{ name: 'NewUser' }" class="add_user_link">Add User</router-link>
     </div>
   </div>
 </template>

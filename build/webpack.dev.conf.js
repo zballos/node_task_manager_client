@@ -42,7 +42,8 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     quiet: true, // necessary for FriendlyErrorsPlugin
     watchOptions: {
       poll: config.dev.poll,
-    }
+    },
+    public: 'https://17647eca.ngrok.io'
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -69,7 +70,11 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 })
 
 module.exports = new Promise((resolve, reject) => {
+  console.log('process', process.env.PORT)
+  console.log('dev', config.dev)
+
   portfinder.basePort = process.env.PORT || config.dev.port
+  console.log(portfinder)
   portfinder.getPort((err, port) => {
     if (err) {
       reject(err)
@@ -78,6 +83,7 @@ module.exports = new Promise((resolve, reject) => {
       process.env.PORT = port
       // add port to devServer config
       devWebpackConfig.devServer.port = port
+      console.log('porta', port)
 
       // Add FriendlyErrorsPlugin
       devWebpackConfig.plugins.push(new FriendlyErrorsPlugin({

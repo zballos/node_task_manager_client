@@ -11,5 +11,9 @@ export default {
 
   login (params) {
     return Api().post('users/authenticate', params)
+  },
+
+  updateFacebookUser (params) {
+    return Api().post('users/save_facebook_user', params)
   }
 }
